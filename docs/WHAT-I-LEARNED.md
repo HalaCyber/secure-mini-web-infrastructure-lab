@@ -59,10 +59,40 @@ This gives me a practical workflow for developing, tracking, and documenting a t
 This supports practical project organization, documentation, and controlled development of application code, configuration, scripts, and security testing.
 
 ### Practical Evidence
-I installed Git, cloned my GitHub repository into Ubuntu, entered the local repository, and verified its status and remote connection.
+I installed Git, cloned my GitHub repository into Ubuntu, checked the repository status and remote connection, created my first commit, handled a local/remote difference using `git pull --rebase`, and successfully pushed the commit to GitHub.
 
 ### New Practical Skill
-**Before this project, I did not know how to clone a GitHub repository into Ubuntu or verify its remote connection. I can now perform these steps myself.**
+Before this project, I did not know how to clone a GitHub repository into Ubuntu, check its status and remote connection, create a commit, resolve a local/remote difference using rebase, or push local changes to GitHub. I can now perform this workflow myself.
 
 ### Key Takeaway
 **I learned how to create a local working copy of a GitHub repository using Git and how to verify the connection between the local repository and the remote repository.**
+# Day 1 — Learning Summary
+
+## Main Concepts Learned
+- IP address and subnet
+- Ports and services
+- Client/server communication
+- Web server basics
+- Git and GitHub
+- Local and remote repositories
+
+## Important Connections
+I connected the ideas of IP addresses, ports, clients, and web servers. I also learned how local project work in Ubuntu can be tracked with Git and stored on GitHub.
+
+## Mistakes I Learned From
+I initially thought that a commit was something created directly on GitHub and that changes would automatically appear between Ubuntu and GitHub. I learned the difference between local changes, staging, commits, and pushing to the remote repository.
+
+## New Tools / Commands I Understood
+- `git clone`
+- `git status`
+- `git remote -v`
+- `git add`
+- `git commit`
+- `git pull --rebase`
+- `git push`
+
+## Security Insights
+I learned the importance of understanding the environment before testing it. I identified the VM network interface, IP address, subnet, and default gateway before starting the project.
+
+## Most Important Lesson of the Day
+I learned to connect networking concepts with practical system work: an IP identifies where to connect, a port identifies the service endpoint, and a client communicates with a server through that endpoint. I also learned a practical Git workflow for tracking and documenting project changes.
