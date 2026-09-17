@@ -7,3 +7,8 @@
 ## Environment
 
 ## Architecture
+
+
+## Project Status
+
+Project setup is in progress.
