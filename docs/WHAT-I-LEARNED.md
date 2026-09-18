@@ -247,3 +247,47 @@ Before this project, I had not used `curl` to send an HTTP request to a web serv
 ### Key Takeaway
 
 **The client sends the request, the server processes it and sends a response, and the client receives the response.**
+
+## Lesson 6 — Service Binding and Network Exposure
+
+### What I Thought
+
+I thought that if a web server was running on my Ubuntu machine, it would automatically be reachable using the VM's network IP address.
+
+### What I Discovered
+
+I discovered that the address a service binds to affects where the service can accept connections. When my Python server was bound to `127.0.0.1:8000`, it was reachable locally but not through `192.168.198.128:8000`.
+
+After changing the binding to `0.0.0.0:8000`, the server accepted connections through the VM's network IP as well.
+
+### What I Learned
+
+`127.0.0.1` is the loopback interface and limits the service to local access. `0.0.0.0` tells the server to listen on all IPv4 interfaces available on the system.
+
+The actual network exposure of a service also depends on other controls such as firewall rules, routing, and NAT.
+
+### Why It Matters
+
+Service binding is an important part of understanding attack surface. A service that listens on a network interface may be reachable by other systems, depending on the surrounding network controls.
+
+### Connection to Pre Security
+
+This connects to:
+- Service Exposure
+- Network Interfaces
+- TCP Ports
+- IP Address Binding
+- Client/Server
+- Attack Surface
+
+### Practical Evidence
+
+I verified with `ss -ltnp` that the Python process was first listening on `127.0.0.1:8000`. After changing the binding to `0.0.0.0:8000`, I verified that Linux reported `0.0.0.0:8000` and successfully accessed the server using `192.168.198.128:8000`.
+
+### New Practical Skill
+
+Before this project, I did not know how a service's binding address affected its network reachability. I can now identify the address a service is listening on and test its accessibility using a specific IP and port.
+
+### Key Takeaway
+
+**The address a service binds to affects which interfaces can receive connections. `127.0.0.1` is local-only, while `0.0.0.0` listens on all IPv4 interfaces.**

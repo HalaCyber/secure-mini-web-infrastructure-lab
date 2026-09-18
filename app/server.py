@@ -22,7 +22,7 @@ class SimpleWebHandler(BaseHTTPRequestHandler):
         self.wfile.write(body.encode())
 
 
-server = HTTPServer(("127.0.0.1", 8000), SimpleWebHandler)
+server = HTTPServer(("0.0.0.0", 8000), SimpleWebHandler)
 
 print("Web server running on http://127.0.0.1:8000")
 
