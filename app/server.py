@@ -24,6 +24,6 @@ class SimpleWebHandler(BaseHTTPRequestHandler):
 
 server = HTTPServer(("0.0.0.0", 8000), SimpleWebHandler)
 
-print("Web server running on http://127.0.0.1:8000")
+print("Web server listening on port 8000 on all IPv4 interfaces")
 
 server.serve_forever()

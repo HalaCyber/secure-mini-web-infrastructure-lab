@@ -291,3 +291,48 @@ Before this project, I did not know how a service's binding address affected its
 ### Key Takeaway
 
 **The address a service binds to affects which interfaces can receive connections. `127.0.0.1` is local-only, while `0.0.0.0` listens on all IPv4 interfaces.**
+# Day 2 — Learning Summary
+
+## Main Concepts Learned
+
+* Python virtual environments
+* `.gitignore`
+* Web server processes
+* HTTP requests and responses
+* TCP ports
+* Loopback address
+* Service binding
+* Network exposure
+
+## Important Connections
+
+I connected the Python application to the Linux operating system by understanding that the web server runs as a process and listens on a TCP port. I also connected the client/server model to real HTTP communication using both `curl` and a web browser.
+
+## Mistakes I Learned From
+
+I initially thought that having a web server running meant it would automatically be reachable through the VM's network IP. I learned that the address a service binds to affects where it can accept connections.
+
+I also learned that Python being installed does not automatically mean that the `venv` components are available.
+
+## New Tools / Commands I Understood
+
+* `python3 -m venv`
+* `source .venv/bin/activate`
+* `curl -i`
+* `ss -ltnp`
+* `ps -fp`
+* `git add`
+* `git commit`
+* `git push`
+
+## Security Insights
+
+I learned that service exposure depends on how a service is bound to network interfaces. A service listening on `127.0.0.1` is local to the machine, while binding to `0.0.0.0` allows the service to listen on all IPv4 interfaces. Actual accessibility also depends on controls such as firewall rules, routing, and NAT.
+
+## Practical Evidence
+
+I built a Python web server, tested it with `curl` and a browser, verified the listening socket with `ss`, identified the server process with `ps`, and compared the behavior of `127.0.0.1:8000` with `192.168.198.128:8000`.
+
+## Most Important Lesson of the Day
+
+I learned that a web application is a process running inside the operating system, and its network exposure depends on the address and port it binds to. I also learned how an HTTP request travels from a client to a server and how the server returns an HTTP response.
