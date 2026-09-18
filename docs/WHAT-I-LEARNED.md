@@ -117,3 +117,133 @@ I learned the importance of understanding the environment before testing it. I i
 ## Most Important Lesson of the Day
 
 I learned to connect networking concepts with practical system work: an IP identifies where to connect, a port identifies the service endpoint, and a client communicates with a server through that endpoint. I also learned a practical Git workflow for tracking and documenting project changes.
+
+---
+
+## Lesson 3 — Virtual Environments and `.gitignore`
+
+### What I Thought
+
+I thought that the Python environment used to run the project would also need to be uploaded to GitHub.
+
+### What I Discovered
+
+I learned that the virtual environment (`.venv`) is part of my local development and execution environment. It does not need to be stored in the repository.
+
+### What I Learned
+
+A project repository should contain the files needed to understand, develop, and reproduce the project, while local environment files such as `.venv` can remain on the machine. I also learned that `.gitignore` tells Git which local files and directories should not be tracked.
+
+### Why It Matters
+
+Keeping local environment files out of the repository makes the project cleaner and helps reduce the risk of accidentally committing unnecessary or sensitive files.
+
+### Connection to Pre Security
+
+This connects to:
+
+- Linux file management
+- Software environments
+- Project organization
+- Basic security practices
+
+### Practical Evidence
+
+I created a Python virtual environment named `.venv` inside the Ubuntu project directory and added `.venv/` to `.gitignore`. Git then showed `.gitignore` as an untracked project file instead of showing the files inside `.venv`.
+
+### New Practical Skill
+
+Before this project, I did not know how to exclude a local development environment from Git tracking. I can now create a `.gitignore` rule for local project files.
+
+### Key Takeaway
+
+**The repository contains the project; the local virtual environment stays on the machine. `.gitignore` helps Git avoid tracking files that should remain local.**
+
+---
+
+## Lesson 4 — Local Web Server and Loopback
+
+### What I Thought
+
+I did not have a clear picture of what a web server actually was or how it worked on a real system.
+
+### What I Discovered
+
+I built and started a simple Python web server inside my Ubuntu VM. The server runs as a program and listens for connections on `127.0.0.1:8000`.
+
+### What I Learned
+
+A web server is a program that listens for client requests and sends responses. In this project, the web server is implemented in Python.
+
+`127.0.0.1` is the loopback address, which means the server is currently reachable from the same machine. The port `8000` is the endpoint where our web server is listening.
+
+### Why It Matters
+
+Understanding where a service is listening helps me understand which systems and interfaces can reach it. This is important when thinking about service exposure and attack surface.
+
+### Connection to Pre Security
+
+This connects to:
+
+- Operating Systems
+- Processes
+- Client/Server
+- IP Addresses
+- Ports
+- HTTP
+- Networking
+
+### Practical Evidence
+
+I started the Python web server on Ubuntu and confirmed that it was listening on `127.0.0.1:8000`.
+
+### New Practical Skill
+
+Before this project, I did not know how to create and start a local web server in Python. I can now run a basic web server and understand the address and port where it listens.
+
+### Key Takeaway
+
+**A web server is a program that listens for client requests and sends responses. `127.0.0.1` means local access from the same machine, while the port identifies where the service is listening.**
+
+---
+
+## Lesson 5 — HTTP Request and Response
+
+### What I Thought
+
+I understood that a client requests something from a web server, but I had not seen the process happen in a real system.
+
+### What I Discovered
+
+I used `curl` as a client to send an HTTP GET request to my Python web server at `127.0.0.1:8000`. The server received the request and logged it, then returned an HTTP response.
+
+### What I Learned
+
+The client sends an HTTP request to the server, and the server sends an HTTP response back to the client. In this test, `curl` displayed the response while the web server terminal logged the incoming request.
+
+### Why It Matters
+
+Understanding the request/response flow helps me analyze how web applications communicate and where security issues can appear during authorized testing.
+
+### Connection to Pre Security
+
+This connects to:
+
+- HTTP Requests and Responses
+- GET Method
+- HTTP Status Codes
+- Client/Server
+- Web Servers
+- Networking
+
+### Practical Evidence
+
+I sent a GET request using `curl` to `http://127.0.0.1:8000` and observed a `200 OK` response containing HTML. The Python web server also logged the incoming GET request.
+
+### New Practical Skill
+
+Before this project, I had not used `curl` to send an HTTP request to a web server I built myself. I can now start a local web server and test it as a client using `curl`.
+
+### Key Takeaway
+
+**The client sends the request, the server processes it and sends a response, and the client receives the response.**
