@@ -336,3 +336,89 @@ I built a Python web server, tested it with `curl` and a browser, verified the l
 ## Most Important Lesson of the Day
 
 I learned that a web application is a process running inside the operating system, and its network exposure depends on the address and port it binds to. I also learned how an HTTP request travels from a client to a server and how the server returns an HTTP response.
+## Lesson 7 — Network Troubleshooting and VPN Interference
+
+### What I Thought
+
+I did not fully understand how to troubleshoot a network connection when the web server was running but another machine could not reach it.
+
+### What I Discovered
+
+I tested the connection from the Windows host to the Ubuntu web server using the server's IP address and port. The connection failed even though the web server was running.
+
+I then checked the network interfaces on Windows and found that Proton VPN was active. After temporarily disconnecting the VPN, the connection to the web server succeeded.
+
+### What I Learned
+
+A connection can fail even when the application and server are working correctly. Network components such as VPNs can interfere with local or virtual network traffic.
+
+### Why It Matters
+
+When troubleshooting a security lab or network service, I need to check the whole communication path instead of assuming that the application is the problem.
+
+### Practical Evidence
+
+The Windows host could not connect to `192.168.198.128:8000` while Proton VPN was active. After disconnecting the VPN, the same connection succeeded and the web page loaded.
+
+### New Practical Skill
+
+I can use a TCP connectivity test to check whether a host can reach a service on a specific IP address and port, and I understand that VPN software can affect local network connectivity.
+
+### Key Takeaway
+
+**When a network connection fails, the problem may be somewhere in the network path and not in the application itself.**
+# Day 3 — Learning Summary
+
+## Main Concepts Learned
+
+* VMware VMnet8
+* NAT network
+* Host and Virtual Machine
+* Client/Server communication
+* Network interfaces
+* TCP connectivity
+* Service binding
+* Network troubleshooting
+* VPN interference
+
+## Important Connections
+
+I connected the Windows host and the Ubuntu virtual machine through VMware's VMnet8 virtual network. I learned that a client and server can communicate locally on the same machine using `127.0.0.1`, or communicate across a virtual network using the VM's network IP address.
+
+## Mistakes I Learned From
+
+I initially thought that if the web server was running, the Windows host would automatically be able to connect to it. I learned that network configuration and other software, such as a VPN, can affect whether the connection succeeds.
+
+## New Tools / Commands I Understood
+
+* `ip addr show`
+* `ip route`
+* `ss -ltnp`
+* `ps -fp`
+* `ping`
+* `curl`
+* `Test-NetConnection`
+* `Get-NetAdapter`
+* `Get-Service`
+* `route print`
+* `tcpdump`
+
+## Security Insights
+
+I learned that a service can be running correctly while a network connection to it still fails. Troubleshooting requires checking the application, listening port, network interface, routing, firewall, VPN, and virtual network.
+
+I also learned that changing a service binding from `127.0.0.1` to `0.0.0.0` changes the interfaces on which the service listens and can increase its network exposure.
+
+## Practical Evidence
+
+I verified the Ubuntu network interface and IP address, confirmed the Python service was listening on `0.0.0.0:8000`, and successfully accessed the web server from the Windows host using `192.168.198.128:8000`.
+
+The initial connection failed while Proton VPN was active. After disconnecting the VPN, the Windows host successfully reached the Ubuntu web server.
+
+## Most Important Lesson of the Day
+
+I learned the difference between local and network communication. When the client and server were running on the same Ubuntu VM, the connection used `127.0.0.1` and was local to the machine. When the Windows host accessed the Ubuntu server using `192.168.198.128:8000`, the communication traveled through the VMware virtual network.
+
+## Key Takeaway
+
+**A service can work locally but still be unreachable from another machine. Network interfaces, routing, VPNs, and other network controls affect whether a service can be reached.**
