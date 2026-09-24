@@ -483,3 +483,54 @@ I learned how to move from simply running a web server to systematically testing
 ## Key Takeaway
 
 **A security assessment should observe, reproduce, document, and evaluate application behavior before deciding how serious a finding is.**
+# Day 5 — Learning Summary
+
+## Main Concepts Learned
+
+* Security hardening
+* Remediation
+* Retesting
+* HTTP error handling
+* Server information disclosure
+* Security response headers
+* Git cleanup
+
+## Important Connections
+
+I learned that security testing does not stop after identifying a problem. A finding should be understood, fixed, and tested again to verify that the remediation actually worked.
+
+## Remediation Performed
+
+I corrected the application's routing so that unknown paths return `404 Not Found` instead of `200 OK`.
+
+I reduced server information disclosure by replacing the default Python server identification with a generic application name.
+
+I added common security response headers:
+
+* `X-Content-Type-Options: nosniff`
+* `Content-Security-Policy: default-src 'self'`
+* `Referrer-Policy: no-referrer`
+
+I also replaced verbose default error pages with simpler custom error responses.
+
+## Retesting
+
+The application was tested again after the changes. The root path returned `200 OK`, while unknown paths such as `/abc` and `/admin` returned `404 Not Found`.
+
+The server information no longer exposed the Python version, and the configured security headers were present in the response.
+
+Unsupported methods such as `POST` continued to return an error, but the detailed implementation information was removed from the response.
+
+## Git / Project Hygiene
+
+During the remediation work, Python created local `__pycache__` files. I learned that temporary Python files should not be tracked by Git, so I updated `.gitignore` to exclude `__pycache__/` and `*.pyc`.
+
+## Most Important Lesson of the Day
+
+A security finding is only part of the work. A complete security workflow is:
+
+**Find → Understand → Fix → Retest → Document**
+
+## Key Takeaway
+
+**Security hardening means reducing unnecessary exposure and then using repeatable tests to prove that the changes actually improved the system.**

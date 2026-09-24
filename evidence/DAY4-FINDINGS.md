@@ -129,3 +129,84 @@ Security hardening observation.
 Evidence File
 
 evidence/day4-http-enumeration.txt
+---
+
+# Day 5 — Remediation and Retest
+
+## Finding 01 — Incorrect 404 Handling
+
+### Remediation
+
+The application was updated to check the requested path. The root path `/` returns the normal page, while unknown paths return `404 Not Found`.
+
+### Retest Result
+
+The following requests were tested:
+
+```text
+/      → 200 OK
+/abc   → 404 Not Found
+/admin → 404 Not Found
+Status
+
+Fixed and retested successfully.
+
+Retest Evidence
+
+evidence/day5-retest.txt
+
+Finding 02 — Server Information Disclosure
+Remediation
+
+The default server identification was changed from the Python BaseHTTPServer implementation and Python version to a generic application server name.
+
+Before
+Server: BaseHTTP/0.6 Python/3.14.4
+After
+Server: SecureMiniWeb
+Status
+
+Improved and retested successfully.
+
+Retest Evidence
+
+evidence/day5-retest.txt
+
+Observation 03 — Verbose Error Responses
+Remediation
+
+Custom error handling was added for HTTP errors so that responses no longer expose detailed implementation messages and explanations.
+
+Before
+
+Error responses included:
+
+Message:
+Error code explanation:
+After
+
+Error responses contain a simple status and message without the previous detailed explanation.
+
+Status
+
+Improved and retested successfully.
+
+Retest Evidence
+
+evidence/day5-retest.txt
+
+Observation 04 — Missing Common Security Response Headers
+Remediation
+
+The application was updated to include:
+
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src 'self'
+Referrer-Policy: no-referrer
+Status
+
+Implemented and retested successfully.
+
+Retest Evidence
+
+evidence/day5-retest.txt
