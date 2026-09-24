@@ -422,3 +422,64 @@ I learned the difference between local and network communication. When the clien
 ## Key Takeaway
 
 **A service can work locally but still be unreachable from another machine. Network interfaces, routing, VPNs, and other network controls affect whether a service can be reached.**
+# Day 4 — Learning Summary
+
+## Main Concepts Learned
+
+* HTTP enumeration
+* HTTP methods
+* HTTP status codes
+* Error handling
+* Information disclosure
+* Security response headers
+* Evidence collection
+* Security findings
+
+## Important Connections
+
+I connected HTTP behavior with security testing. I learned that testing different paths and HTTP methods can reveal how an application handles valid, invalid, and unsupported requests.
+
+## Findings Identified
+
+I identified that the application returns `200 OK` for non-existing paths such as `/does-not-exist`, `/abc`, and `/admin`.
+
+I also identified that the `Server` response header exposes `BaseHTTP/0.6 Python/3.14.4`, and that unsupported methods such as `POST` and `OPTIONS` return detailed error responses.
+
+The server also does not currently include several common browser security response headers. This is treated as a hardening observation rather than automatically as a vulnerability.
+
+## Mistakes I Learned From
+
+I initially thought that every URL that returned `200 OK` represented a real resource. I learned that an application can incorrectly return the same successful response for paths that do not exist.
+
+I also learned that an observed behavior should not automatically be called a vulnerability. It needs to be understood, reproduced, and evaluated in context.
+
+## New Tools / Commands I Understood
+
+* `curl -i`
+* `curl -X`
+* `curl -D`
+* `tee`
+* HTTP method testing
+* HTTP response header inspection
+
+## Practical Evidence
+
+I tested the Python web server using several GET paths and HTTP methods and stored the raw results in:
+
+`evidence/day4-http-enumeration.txt`
+
+I also documented the identified findings in:
+
+`evidence/DAY4-FINDINGS.md`
+
+## Security Insights
+
+Security testing is not only about finding exploits. It also includes identifying incorrect application behavior, information disclosure, verbose errors, and missing security controls.
+
+## Most Important Lesson of the Day
+
+I learned how to move from simply running a web server to systematically testing its HTTP behavior, collecting evidence, and documenting security findings.
+
+## Key Takeaway
+
+**A security assessment should observe, reproduce, document, and evaluate application behavior before deciding how serious a finding is.**
