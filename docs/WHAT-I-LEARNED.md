@@ -534,3 +534,40 @@ A security finding is only part of the work. A complete security workflow is:
 ## Key Takeaway
 
 **Security hardening means reducing unnecessary exposure and then using repeatable tests to prove that the changes actually improved the system.**
+# Day 6 — Final Learning Summary
+
+## Main Concepts Learned
+
+- Final security verification
+- Before/after validation
+- Security remediation
+- Evidence organization
+- Architecture documentation
+- Project documentation
+- Git-based project completion
+
+## Final Verification
+
+The final web server was tested after remediation.
+
+The root path `/` returned `200 OK`.
+
+A non-existing path such as `/does-not-exist` returned `404 Not Found`.
+
+The server response no longer exposed the Python version and returned the configured security response headers.
+
+The web service was verified to be listening on `0.0.0.0:8000`.
+
+## Final Security Workflow
+
+The project followed this workflow:
+
+Find → Understand → Fix → Retest → Document
+
+## Most Important Lesson of the Project
+
+I learned that building a security lab is not only about running tools. I need to understand the system first, test its behavior, collect evidence, identify findings, apply appropriate remediation, and retest the system to confirm the changes.
+
+## Final Key Takeaway
+
+**A good security assessment connects networking, application behavior, evidence, remediation, and documentation into one repeatable process.**
